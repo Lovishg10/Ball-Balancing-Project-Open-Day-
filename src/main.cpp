@@ -126,4 +126,7 @@ void loop() {
  
   }
 }
- 
+  //move_ellipse(30, 20, 20, 4);
+  //move_figure8(30, 20, 4);
+  //move_square(30, 20, 4);
+  //move_heart(40, 20, 4);
