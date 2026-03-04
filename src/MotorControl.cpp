@@ -1,11 +1,11 @@
 #include "MotorControl.h"
 
-#define ANGLE_TO_ORIGIN_A 71     // angle offset
-#define ANGLE_TO_ORIGIN_B 66.75  // angle offset
-#define ANGLE_TO_ORIGIN_C 61.95  // angle offset
-#define ENA 0                    // ENA pin
-#define h0 87                    // height of platform when motors are at zero position
-#define ks 100.0                 // a constant to change our proportional speed function
+double ANGLE_TO_ORIGIN_A = 71;     // angle offset
+double ANGLE_TO_ORIGIN_B = 66.75;  // angle offset
+double ANGLE_TO_ORIGIN_C = 61.95 ; // angle offset
+double ENA = 0 ;                   // ENA pin
+double h0 = 87  ;                  // height of platform when motors are at zero position
+double ks = 100.0 ;                // a constant to change our proportional speed function
 
 // setup for steppers
 AccelStepper motorA(1, 3, 2);  //(driver type, STEP, DIR) Driver A

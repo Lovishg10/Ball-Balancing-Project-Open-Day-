@@ -9,6 +9,13 @@
 #include <AccelStepper.h>
 #include <MultiStepper.h>
 
+extern double kp, ki, kd; //Standard gains
+extern double kp_adj, ki_adj, kd_adj; //Adjustive gains
+// Constriants and Thresholds
+extern double max_output, max_angle; 
+extern double integ_limit;
+extern double adj_threshold;
+
 void pid_balance(double setpoint_x, double setpoint_y);
 void move_to_point(double setpoint_x, double setpoint_y, unsigned long delay);
 void move_line(double rx, double ry, double speed, int repeat = 0);

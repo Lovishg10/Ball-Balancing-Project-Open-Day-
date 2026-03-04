@@ -5,16 +5,17 @@
 extern bool enable_serial_output;
 
 // PID Constants
-#define kp .8            //.8
-#define ki .2            //.2
-#define kd .09           //.09
-#define kv 0.05          //.05
-#define kp_adj .4        //.4
-#define ki_adj .25       //.25
-#define kd_adj .23       //.23
-#define max_output 83.5  // max X distance away from the center
-#define max_angle 12.5   // max tilt angle
-
+double kp = 0.8 ;           //.8
+double ki = 0.2  ;          //.2
+double kd = 0.09 ;          //.09
+double kv = 0.05 ;         //.05
+double kp_adj = 0.4 ;       //.4
+double ki_adj = 0.25 ;      //.25
+double kd_adj = 0.23  ;     //.23
+double integ_limit = 50.0;
+double max_output = 83.5 ; // max X distance away from the center
+double max_angle = 12.5  ; // max tilt angle
+double adj_threshold = 25.0; 
 //Variables needed for PID control
 double error[2] = { 0, 0 }, error_prev[2], integ[2] = { 0, 0 }, deriv[2] = { 0, 0 }, output[2], output_angles[2];
 double speed[3] = { 0, 0, 0 }, speed_prev[3];
@@ -78,12 +79,12 @@ void pid_balance(double setpoint_x, double setpoint_y) {
         double v = constrain(ball_vel[i], -1000, 1000);
         error[i] = error_current;
         integ[i] += error[i] * dt;
-        integ[i] = constrain(integ[i], -50, 50);  // Constrains integral values to prevent windup
+        integ[i] = constrain(integ[i], -integ_limit, integ_limit);  // Constrains integral values to prevent windup
         deriv[i] = (error[i] - error_prev[i]) / dt;
         deriv[i] = isnan(deriv[i]) || isinf(deriv[i]) ? 0 : deriv[i];  // Simple check to eliminate nonreal or infinite numbers, as derivative is being divided by a number that could be zero
 
         // Adjusts gain constants if ball is close to target
-        if (abs(error[i]) < 25) {
+        if (abs(error[i]) < adj_threshold) {
           output[i] = kp_adj * error[i] + ki_adj * integ[i] + kd_adj * deriv[i];
         } else {
           output[i] = kp * error[i] + ki * integ[i] + kd * deriv[i];

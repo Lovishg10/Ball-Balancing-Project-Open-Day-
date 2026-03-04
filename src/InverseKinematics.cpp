@@ -150,7 +150,7 @@ IKResult ik_solver(double base_point[3], double top_point[3], double e, double f
   double d2 = vector_magnitude(r);
 
   // Check if points are the same or target is unreachable
-  if (d2 < 0.001 || d2 > e + f || d2 < abs(e - f)) {
+  if (d2 < 0.001 || d2 > e + f || d2 < fabs(e - f)) {
     return { 0, 0 };  // Error case
   }
 

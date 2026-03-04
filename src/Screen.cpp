@@ -8,18 +8,18 @@
 
 
 // Touch screen calibration (adjust if needed)
-#define TS_MINX 60
-#define TS_MAXX 963
-#define TS_MINY 80
-#define TS_MAXY 947
+double TS_MINX = 60 ;
+double TS_MAXX = 963;
+double TS_MINY = 80;
+double TS_MAXY = 947;
 
 // Screen dimensions
 #define SCREEN_WIDTH_MM 167.0
 #define SCREEN_HEIGHT_MM 135.5
 
 // Pressure thresholds (adjust if needed)
-#define MINPRESSURE .000000000001
-#define MAXPRESSURE 500
+double MINPRESSURE = .000000000001;
+double MAXPRESSURE = 500;
 
 TouchScreen ts = TouchScreen(XP, YP, XM, YM, 200);  // 300 = ohms of touchscreen
 TSPoint currentPoint;
